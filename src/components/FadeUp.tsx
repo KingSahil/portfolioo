@@ -1,6 +1,7 @@
+import React from "react";
 import { motion } from "motion/react";
 
-export function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
+export function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string, key?: React.Key }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}

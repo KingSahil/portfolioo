@@ -124,28 +124,6 @@ body {
 .bento-card:hover::before, .bento-card:hover::after {
   opacity: 1;
 }
-
-.role-roller {
-  height: 1.2em;
-  overflow: hidden;
-  display: inline-block;
-  vertical-align: bottom;
-}
-.role-roller-inner {
-  display: flex;
-  flex-direction: column;
-  animation: roll 12s infinite cubic-bezier(0.16, 1, 0.3, 1);
-}
-@keyframes roll {
-  0%, 14% { transform: translateY(0); }
-  16%, 31% { transform: translateY(-1.2em); }
-  33%, 47% { transform: translateY(-2.4em); }
-  50%, 64% { transform: translateY(-3.6em); }
-  66%, 81% { transform: translateY(-4.8em); }
-  83%, 98% { transform: translateY(-6em); }
-  100% { transform: translateY(0); }
-}
-
 .text-gradient {
   background: linear-gradient(to right, #89AACC, #4E85BF);
   -webkit-background-clip: text;

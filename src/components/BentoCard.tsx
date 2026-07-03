@@ -1,4 +1,4 @@
-import { MouseEvent, useRef, useState } from "react";
+import React, { MouseEvent, useRef, useState } from "react";
 
 export function BentoCard({ children, className = "" }: { children: React.ReactNode, className?: string }) {
   const cardRef = useRef<HTMLDivElement>(null);

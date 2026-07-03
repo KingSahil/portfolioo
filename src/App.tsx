@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import {
   ArrowRight,
   Download,
@@ -23,6 +25,53 @@ import ShaderBackground from "./components/ShaderBackground";
 import { BentoCard } from "./components/BentoCard";
 import { FadeUp } from "./components/FadeUp";
 import { Counter } from "./components/Counter";
+
+const roles = [
+  "AI Engineer",
+  "Full Stack Developer",
+  "Hackathon Builder",
+  "Open Source Contributor",
+  "Creator",
+  "Student"
+];
+
+function RoleRoller() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((prevIndex) => (prevIndex + 1) % roles.length);
+    }, 2500);
+    return () => clearInterval(timer);
+  }, []);
+
+  const currentRole = roles[index];
+  const article = ["A", "E", "I", "O", "U"].includes(currentRole[0]) ? "an" : "a";
+
+  return (
+    <div className="text-2xl md:text-3xl text-primary-container font-medium mb-8 flex items-center justify-center gap-x-2 h-[1.5em]">
+      <span className="opacity-60 select-none">I am {article}</span>
+      <motion.span
+        layout
+        transition={{ type: "spring", stiffness: 350, damping: 30 }}
+        className="inline-flex relative overflow-hidden h-[1.2em] font-bold text-left"
+      >
+        <AnimatePresence mode="popLayout">
+          <motion.span
+            key={currentRole}
+            initial={{ y: "100%", opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: "-100%", opacity: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="block whitespace-nowrap"
+          >
+            {currentRole}
+          </motion.span>
+        </AnimatePresence>
+      </motion.span>
+    </div>
+  );
+}
 
 export default function App() {
   return (
@@ -72,20 +121,7 @@ export default function App() {
           </FadeUp>
 
           <FadeUp delay={0.2}>
-            <div className="text-2xl md:text-3xl text-primary-container font-medium mb-8">
-              <span className="opacity-60">I am a </span>
-              <span className="font-bold role-roller">
-                <span className="role-roller-inner">
-                  <span>AI Engineer</span>
-                  <span>Full Stack Developer</span>
-                  <span>Hackathon Builder</span>
-                  <span>Open Source Contributor</span>
-                  <span>Creator</span>
-                  <span>Student</span>
-                  <span>AI Engineer</span>
-                </span>
-              </span>
-            </div>
+            <RoleRoller />
           </FadeUp>
 
           <FadeUp delay={0.3}>
