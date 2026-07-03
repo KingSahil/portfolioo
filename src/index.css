@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Instrument+Serif:italic&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-background: #121316;
+  --color-on-background: #e3e2e5;
+  --color-surface: #121316;
+  --color-surface-variant: #333537;
+  --color-surface-container-highest: #333537;
+  --color-surface-container-high: #292a2c;
+  --color-surface-container-lowest: #0d0e10;
+  --color-primary: #a8caed;
+  --color-primary-container: #89aacc;
+  --color-on-surface: #e3e2e5;
+  --color-on-surface-variant: #c2c7ce;
+  --color-outline-variant: #42474d;
+
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Instrument Serif', serif;
+  --font-headline-md: 'Inter', sans-serif;
+  --font-label-sm: 'Inter', sans-serif;
+  --font-emphasis-italic: 'Instrument Serif', serif;
+  --font-body-lg: 'Inter', sans-serif;
+  --font-display-lg: 'Inter', sans-serif;
+  --font-display-lg-mobile: 'Inter', sans-serif;
+  --font-body-base: 'Inter', sans-serif;
+
+  --text-headline-md: 32px;
+  --text-headline-md--line-height: 1.2;
+  --text-headline-md--letter-spacing: -0.02em;
+
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 1;
+  --text-label-sm--letter-spacing: 0.05em;
+
+  --text-emphasis-italic: 1.1em;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.6;
+  --text-body-lg--letter-spacing: -0.01em;
+
+  --text-display-lg: 72px;
+  --text-display-lg--line-height: 1.1;
+  --text-display-lg--letter-spacing: -0.04em;
+
+  --text-display-lg-mobile: 48px;
+  --text-display-lg-mobile--line-height: 1.1;
+  --text-display-lg-mobile--letter-spacing: -0.03em;
+
+  --text-body-base: 16px;
+  --text-body-base--line-height: 1.6;
+
+  --spacing-margin-mobile: 20px;
+  --spacing-section-gap: 160px;
+  --spacing-unit: 8px;
+  --spacing-gutter: 24px;
+  --spacing-container-max: 1200px;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-on-background);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.noise-bg {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+.glass-panel {
+  background: rgba(26, 28, 30, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+}
+
+.bento-card {
+  background: #111111;
+  border: 1px solid #222222;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.bento-card:hover {
+  border-color: rgba(137, 170, 204, 0.5);
+  transform: translateY(-4px) rotateX(2deg) rotateY(-2deg);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(137, 170, 204, 0.15);
+}
+
+.bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255,255,255,0.06), transparent 40%);
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bento-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to right, #89AACC, #4E85BF);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.bento-card:hover::before, .bento-card:hover::after {
+  opacity: 1;
+}
+
+.role-roller {
+  height: 1.2em;
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+}
+.role-roller-inner {
+  display: flex;
+  flex-direction: column;
+  animation: roll 12s infinite cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes roll {
+  0%, 14% { transform: translateY(0); }
+  16%, 31% { transform: translateY(-1.2em); }
+  33%, 47% { transform: translateY(-2.4em); }
+  50%, 64% { transform: translateY(-3.6em); }
+  66%, 81% { transform: translateY(-4.8em); }
+  83%, 98% { transform: translateY(-6em); }
+  100% { transform: translateY(0); }
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #89AACC, #4E85BF);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.timeline-dot {
+  background: linear-gradient(to right, #89AACC, #4E85BF);
+}
+
+.timeline-line {
+  background: linear-gradient(to bottom, #89AACC, transparent);
+}
